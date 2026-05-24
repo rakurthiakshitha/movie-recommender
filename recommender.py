@@ -54,9 +54,3 @@ def hybrid_recommend(title, top_n=10):
     
     return recommended_titles
 
-# --- Run the program ---
-movie_name = input("\nEnter a movie name: ")
-print(f"\nSmart Recommendations for '{movie_name}':")
-recs = hybrid_recommend(movie_name)
-for i, movie in enumerate(recs, 1):
-    print(f"{i}. {movie}")
