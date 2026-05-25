@@ -5,8 +5,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import requests
 
 app = Flask(__name__)
-
-print("Loading data and building recommender...")
 movies = pd.read_csv('movies.csv')
 ratings = pd.read_csv('ratings.csv')
 
@@ -15,9 +13,9 @@ movies['genres'] = movies['genres'].str.replace('|', ' ')
 rated_movie_ids = ratings['movieId'].unique()
 movies_filtered = movies[movies['movieId'].isin(rated_movie_ids)].reset_index(drop=True)
 
-tfidf = TfidfVectorizer(stop_words='english')
-tfidf_matrix_filtered = tfidf.fit_transform(movies_filtered['genres'])
-content_sim_filtered = cosine_similarity(tfidf_matrix_filtered)
+# tfidf = TfidfVectorizer(stop_words='english')
+# tfidf_matrix_filtered = tfidf.fit_transform(movies_filtered['genres'])
+# content_sim_filtered = cosine_similarity(tfidf_matrix_filtered)
 
 user_movie_matrix = ratings.pivot_table(index='userId', columns='movieId', values='rating').fillna(0)
 movie_sim_collab = cosine_similarity(user_movie_matrix.T)
